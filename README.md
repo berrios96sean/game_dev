@@ -4,6 +4,10 @@ This is a Git LFS repository, more information on setting up git LFS will be inc
 
 * This is the initial repo to set up a working shared directory to begin game design and development. 
 
+# Unity Editor 
+
+* We will be using Unity version 2021.3.26f1
+
 # Navigating Repo 
 
 [Wiki Page](https://github.com/berrios96sean/game_dev/wiki) 
