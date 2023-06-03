@@ -6,4 +6,4 @@ This is a Git LFS repository, more information on setting up git LFS will be inc
 
 # Navigating Repo 
 
-[Wiki Page](https://github.com/berrios96sean/game_dev) 
+[Wiki Page](https://github.com/berrios96sean/game_dev/wiki) 
