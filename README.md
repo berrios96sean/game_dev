@@ -1,4 +1,4 @@
-This is a Git LFS repository, more information on setting up git LFS will be included in the wiki. 
+This is a Git LFS repository, more information on setting up git LFS will be included in the wiki [here](https://github.com/berrios96sean/game_dev/wiki/Setting-up-git-lfs-(Large-File-Storage). 
 
 # Repo Description 
 
