@@ -8,6 +8,7 @@ public class hw_sean : MonoBehaviour
     void Start()
     {
         Debug.Log("Hello, World");
+        Debug.Log("This is but the humble beginning of a new game development empire."); //Wyatt
     }
 
     // Update is called once per frame
