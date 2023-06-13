@@ -27,8 +27,8 @@ jobs:
           path: ~/.cache/unity
           key: unity-dependencies-${{ hashFiles('Project/Packages/manifest.json') }}
 
-      - name: Set up Unity
-        uses: game-ci/setup-unity@v1
+      - name: Unity - Builder
+        uses: game-ci/unity-builder@v2.2.0
         with:
           unity-version: 2021.3.26f1
 
