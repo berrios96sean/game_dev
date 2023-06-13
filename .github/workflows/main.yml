@@ -17,6 +17,15 @@ jobs:
         with:
           lfs: true
 
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Cache Unity Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/unity
+          key: unity-dependencies-${{ hashFiles('Project/Packages/manifest.json') }}
+
       - name: Set up Unity
         uses: game-ci/setup-unity@v1
         with:
