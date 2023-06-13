@@ -33,11 +33,12 @@ jobs:
       - name: change Dir
         id: change-dir
         run: |
+          which unity 
           cd /home/runner/work/game_dev/game_dev/project
           echo "Current working directory:"
           pwd
           ls
-          which unity 
+          
 
       - name: print Dir
         id: print-dir
