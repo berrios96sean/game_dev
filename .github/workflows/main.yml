@@ -25,12 +25,13 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/unity
-          key: unity-dependencies-${{ hashFiles('Project/Packages/manifest.json') }}
+          key: unity-dependencies-${{ hashFiles('project/Packages/manifest.json') }}
 
       - name: Unity - Builder
         uses: game-ci/unity-builder@v2.2.0
         with:
           unity-version: 2021.3.26f1
+          project-path: ./project
 
       - name: Build Unity Project
         run: |
