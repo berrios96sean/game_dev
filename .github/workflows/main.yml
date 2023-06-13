@@ -34,11 +34,11 @@ jobs:
 
       - name: Build Unity Project
         run: |
-          unity -quit -batchmode -projectPath ./MyUnityProject -executeMethod BuildScript.PerformBuild
+          unity -quit -batchmode -projectPath ./project -executeMethod BuildScript.PerformBuild
 
       - name: Run Tests
         run: |
-          unity -runTests -projectPath ./MyUnityProject -testPlatform editmode
+          unity -runTests -projectPath ./project -testPlatform editmode
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
