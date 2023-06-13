@@ -19,6 +19,14 @@ public class pirateMovement : MonoBehaviour
     //This is manipulated within Flip() and referenced within Update() to control which way the sprite is looking based on the direction the player is moving
     bool facingRight = true; 
 
+    // Call PirateSprite Library 
+    public PirateSprite pirate_sprite;
+
+    private void Awake()
+    {
+        pirate_sprite = ScriptableObject.CreateInstance<PirateSprite>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +53,11 @@ public class pirateMovement : MonoBehaviour
 
         //Flip the sprite if its current orientation does not match the direction in which the user wants it to move
         if (horizontalShift > 0 && !facingRight) {
-            Flip();
+            facingRight = pirate_sprite.Flip(gameObject,facingRight);
         }
 
         if (horizontalShift < 0 && facingRight) {
-            Flip(); 
+            facingRight = pirate_sprite.Flip(gameObject,facingRight);
         }
     }
 
