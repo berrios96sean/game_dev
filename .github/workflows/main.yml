@@ -39,7 +39,7 @@ jobs:
         uses: game-ci/unity-builder@v2.2.0
         with:
           unity-version: 2021.3.26f1
-          project-path: game_dev/project
+          project-path: ./project
 
       - name: Build Unity Project
         run: |
