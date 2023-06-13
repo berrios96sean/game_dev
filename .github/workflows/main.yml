@@ -31,7 +31,6 @@ jobs:
         id: change-dir
         run: |
         pwd
-        ls
 
       - name: print Dir
         id: print-dir
