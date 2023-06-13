@@ -21,8 +21,15 @@ jobs:
           lfs: true
 
       - name: Install Unity
-        uses: game-ci/unity-installation-action@v1
-        
+        run: |
+          wget -q https://download.unity3d.com/download_unity/2021.3.26f1/Linux/Unity.tar.xz
+          tar xf Unity.tar.xz
+          sudo ./Unity/Installer/unity-installer \
+            --unattended \
+            --install-location=/opt/Unity \
+            --download-location=/tmp/unity \
+            --components=Unity,Windows-Mono
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
