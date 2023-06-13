@@ -30,7 +30,7 @@ jobs:
       - name: change Dir
         id: change-dir
         run: |
-        cd project 
+        pwd
         ls
 
       - name: print Dir
