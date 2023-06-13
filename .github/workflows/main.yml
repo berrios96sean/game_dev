@@ -20,13 +20,13 @@ jobs:
         with:
           lfs: true
 
-      - name: Install Unity
+     - name: Install Unity
         run: |
           wget -q https://download.unity3d.com/download_unity/2021.3.26f1/Linux/Unity.tar.xz
           tar xf Unity.tar.xz
-          sudo ./Unity/Installer/unity-installer \
+          ./Unity/Installer/unity-installer \
             --unattended \
-            --install-location=/opt/Unity \
+            --install-location=$HOME/Unity \
             --download-location=/tmp/unity \
             --components=Unity,Windows-Mono
 
