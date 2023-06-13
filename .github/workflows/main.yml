@@ -27,6 +27,10 @@ jobs:
           path: ~/.cache/unity
           key: unity-dependencies-${{ hashFiles('project/Packages/manifest.json') }}
 
+      - name: Get Current Directory
+        id: get-dir
+        run: echo "::set-output name=current-dir::$(pwd)"
+
       - name: Unity - Builder
         uses: game-ci/unity-builder@v2.2.0
         with:
