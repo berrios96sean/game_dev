@@ -27,9 +27,13 @@ jobs:
           path: ~/.cache/unity
           key: unity-dependencies-${{ hashFiles('project/Packages/manifest.json') }}
 
-      - name: Get Current Directory
-        id: get-dir
+      - name: change Dir
+        id: change-dir
         run: cd project 
+
+      - name: print Dir
+        id: print-dir
+        run: ls    
 
       - name: Unity - Builder
         uses: game-ci/unity-builder@v2.2.0
