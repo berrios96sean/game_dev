@@ -33,7 +33,7 @@ jobs:
       - name: change Dir
         id: change-dir
         run: |
-          which unity 
+          unity --version
           cd /home/runner/work/game_dev/game_dev/project
           echo "Current working directory:"
           pwd
