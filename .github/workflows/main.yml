@@ -41,14 +41,9 @@ jobs:
         id: print-dir
         run: ls    
 
-      - name: Unity - Builder
-        uses: game-ci/unity-builder@v2.2.0
-        with:
-          unity-version: 2021.3.26f1
-          project-path: /home/runner/work/game_dev/game_dev/project/ProjectSettings
-
       - name: Build Unity Project
         run: |
+          cd /home/runner/work/game_dev/game_dev/project
           unity -quit -batchmode -projectPath ./project -executeMethod BuildScript.PerformBuild
 
       - name: Run Tests
