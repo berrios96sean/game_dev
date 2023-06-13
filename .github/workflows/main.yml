@@ -3,7 +3,6 @@ name: GameCI Workflow
 on:
   push:
     branches:
-      - main 
       - Test_branch
 
 jobs:
@@ -18,26 +17,22 @@ jobs:
         with:
           lfs: true
 
-      # Cache
-      - uses: actions/cache@v2
-        with:
-          path: Library
-          restore-keys: |
-            Library-
-  
-      # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v2
-
-      # Build 
-      - name: Unity - Builder 
-        uses: game-ci/unity-builder@v2.2.0
+      - name: Set up Unity
+        uses: game-ci/setup-unity@v1
         with:
           unity-version: 2021.3.26f1
 
-      # Output
-      - uses: actions/upload-artifact@v2
+      - name: Build Unity Project
+        run: |
+          unity -quit -batchmode -projectPath ./MyUnityProject -executeMethod BuildScript.PerformBuild
+
+      - name: Run Tests
+        run: |
+          unity -runTests -projectPath ./MyUnityProject -testPlatform editmode
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
+          name: Build-Artifact
+          path: ./project/Builds/
 
