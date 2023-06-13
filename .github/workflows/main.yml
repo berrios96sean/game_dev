@@ -44,7 +44,7 @@ jobs:
       - name: Build Unity Project
         run: |
           cd /home/runner/work/game_dev/game_dev/project
-          unity -quit -batchmode -projectPath ./project -executeMethod BuildScript.Build
+          unity -quit -batchmode -projectPath ./project -executeMethod Assets/Editor/build_script.cs
 
       - name: Run Tests
         run: |
