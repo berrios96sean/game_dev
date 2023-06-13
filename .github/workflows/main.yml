@@ -20,7 +20,12 @@ jobs:
         with:
           lfs: true
 
-
+    - name: Set up Unity
+      uses: neon-age/setup-unity@v1
+      with:
+        unityVersion: 2021.3.26f1
+        modules: unity,webgl,android,ios
+        
       - name: Checkout Repository
         uses: actions/checkout@v2
 
