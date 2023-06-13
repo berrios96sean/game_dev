@@ -37,13 +37,12 @@ jobs:
 
       - name: Unity - Builder
         uses: game-ci/unity-builder@v2.2.0
+        run: cd project 
         with:
           unity-version: 2021.3.26f1
-          project-path: ./project
 
       - name: Build Unity Project
         run: |
-          ls
           unity -quit -batchmode -projectPath ./project -executeMethod BuildScript.PerformBuild
 
       - name: Run Tests
