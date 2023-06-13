@@ -37,7 +37,7 @@ jobs:
 
       - name: Unity - Builder
         uses: game-ci/unity-builder@v2.2.0
-        run: cd project 
+        run: cd ./project 
         with:
           unity-version: 2021.3.26f1
 
