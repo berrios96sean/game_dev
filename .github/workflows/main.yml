@@ -30,6 +30,7 @@ jobs:
       - name: Get Current Directory
         id: get-dir
         run: echo "::set-output name=current-dir::$(pwd)"
+        run: ls 
 
       - name: Unity - Builder
         uses: game-ci/unity-builder@v2.2.0
