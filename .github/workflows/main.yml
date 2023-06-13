@@ -3,6 +3,7 @@ name: GameCI Workflow
 on:
   push:
     branches:
+      - main 
       - Test_branch
 
 jobs:
