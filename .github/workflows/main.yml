@@ -29,7 +29,9 @@ jobs:
 
       - name: change Dir
         id: change-dir
-        run: cd ./project 
+        run: |
+        cd ./project 
+        ls
 
       - name: print Dir
         id: print-dir
