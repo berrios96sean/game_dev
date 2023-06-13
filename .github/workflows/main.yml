@@ -32,7 +32,8 @@ jobs:
         run: |
           echo "Current working directory:"
           pwd
-          
+          cd /home/runner/work/game_dev/game_dev/project
+
       - name: print Dir
         id: print-dir
         run: ls    
