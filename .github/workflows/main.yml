@@ -37,6 +37,7 @@ jobs:
           echo "Current working directory:"
           pwd
           ls
+          which unity 
 
       - name: print Dir
         id: print-dir
