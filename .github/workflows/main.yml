@@ -1,0 +1,44 @@
+name: GameCI Workflow
+
+on:
+  push:
+    branches:
+      - main 
+      - Test_branch
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+  
+      # Test
+      - name: Run tests
+        uses: game-ci/unity-test-runner@v2
+
+      # Build 
+      - name: Unity - Builder 
+        uses: game-ci/unity-builder@v2.2.0
+        with:
+          unity-version: 2021.3.26f1
+
+      # Output
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: build
+
