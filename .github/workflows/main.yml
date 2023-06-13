@@ -29,7 +29,7 @@ jobs:
 
       - name: change Dir
         id: change-dir
-        run: cd project 
+        run: cd ./project 
 
       - name: print Dir
         id: print-dir
