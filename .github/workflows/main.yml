@@ -29,8 +29,7 @@ jobs:
 
       - name: change Dir
         id: change-dir
-        run: |
-        pwd
+        run: echo "::set-output name=current-dir::$(pwd)"
 
       - name: print Dir
         id: print-dir
