@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pirateMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
+    //HEALTH
+    public HealthBar healthBar; 
+    public int maxHealth = 100; 
+    public int currentHealth; 
 
     //This allows this script to access the animator which is attached to the pirate 
     //Note that you must also select the animator within the Inspector for this movement script 
@@ -30,7 +34,8 @@ public class pirateMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentHealth = maxHealth; 
+        healthBar.SetMaxHealth(maxHealth); 
     }
 
     // Update is called once per frame
@@ -59,9 +64,23 @@ public class pirateMovement : MonoBehaviour
         if (horizontalShift < 0 && facingRight) {
             facingRight = pirate_sprite.Flip(gameObject,facingRight);
         }
+
+        //Listen for damage, and take damage if necessary 
+        //In its current form, I'm just pressing space bar to make the player take damage, just to make sure the health bar functions 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(20); 
+        }
     }
 
-    //Flip function
+    //Processes damage and updates health bar accordingly
+    void TakeDamage(int damage) 
+    {
+        currentHealth -= damage; 
+        healthBar.SetHealth(currentHealth);
+    }
+
+    //Flip function (for movement/animation)
     void Flip() 
     {
         Vector3 currentScale = gameObject.transform.localScale; 
