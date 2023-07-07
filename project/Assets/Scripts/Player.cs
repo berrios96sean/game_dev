@@ -4,30 +4,37 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+#region Library Imports 
+
     //HEALTH
     public HealthBar healthBar; 
-    public int maxHealth = 100; 
-    public int currentHealth; 
-
     //This allows this script to access the animator which is attached to the pirate 
     //Note that you must also select the animator within the Inspector for this movement script 
     public Animator animator; 
+    // Call PirateSprite Library 
+    public PirateSprite pirate_sprite;
 
+#endregion
+
+#region Variable Declarations 
+
+    public int maxHealth = 100; 
+    public int currentHealth; 
     //Pirate's speed (change in position PER FRAME)
     public float speed = 5.0f; 
-
     //I think the speed of all moveable sprites should maybe be defined as properties of the corresponding classes instead of within their movement scripts
     //For example: Pirate's speed should be inherent to a Pirate class, Zombies' speed should be inherent to a Zombie class (or sub-classes for different zombie types), etc
-
     //Tracks whether the pirate is facing right
     //This is manipulated within Flip() and referenced within Update() to control which way the sprite is looking based on the direction the player is moving
     bool facingRight = true; 
 
-    // Call PirateSprite Library 
-    public PirateSprite pirate_sprite;
+#endregion
 
+#region Functions 
     private void Awake()
     {
+        // Loads these object in the Unity editor automatically binding to the Player Object 
         pirate_sprite = ScriptableObject.CreateInstance<PirateSprite>();
     }
 
@@ -89,5 +96,7 @@ public class Player : MonoBehaviour
 
         facingRight = !facingRight; 
     }
+
+#endregion
 
 }
