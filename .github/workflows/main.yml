@@ -1,0 +1,63 @@
+name: GameCI Workflow
+
+on:
+  push:
+    branches:
+      - main 
+      - Test_branch
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+
+      
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+    - name: Set up Unity
+      uses: neon-age/setup-unity@v1
+      with:
+        unityVersion: 2021.3.26f1
+        modules: unity,webgl,android,ios
+
+      - name: Cache Unity Dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/unity
+          key: unity-dependencies-${{ hashFiles('project/Packages/manifest.json') }}
+
+      - name: change Dir
+        id: change-dir
+        run: |
+          unity --version
+          cd /home/runner/work/game_dev/game_dev/project
+          echo "Current working directory:"
+          pwd
+          ls
+          
+
+      - name: print Dir
+        id: print-dir
+        run: ls    
+
+      - name: Build Unity Project
+        run: |
+          cd /home/runner/work/game_dev/game_dev
+          unity -quit -batchmode -projectPath ./project -executeMethod Assets/Editor/build_script.cs
+
+      - name: Run Tests
+        run: |
+          unity -runTests -projectPath ./project -testPlatform editmode
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build-Artifact
+          path: ./project/Builds/
+
