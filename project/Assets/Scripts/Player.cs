@@ -23,11 +23,15 @@ public class Player : MonoBehaviour
     public int currentHealth; 
     //Pirate's speed (change in position PER FRAME)
     public float speed = 5.0f; 
+    public float magnitude = 0.0f;
     //I think the speed of all moveable sprites should maybe be defined as properties of the corresponding classes instead of within their movement scripts
     //For example: Pirate's speed should be inherent to a Pirate class, Zombies' speed should be inherent to a Zombie class (or sub-classes for different zombie types), etc
     //Tracks whether the pirate is facing right
     //This is manipulated within Flip() and referenced within Update() to control which way the sprite is looking based on the direction the player is moving
     bool facingRight = true; 
+
+    public Rigidbody2D rb; 
+    Vector3 movement; 
 
 #endregion
 
@@ -48,29 +52,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Define the magnitude of horizontal and vertical movements by getting the input axis and multiplying it by speed
-        float horizontalShift = Input.GetAxis("Horizontal") * speed; 
-        float verticalShift = Input.GetAxis("Vertical") * speed; 
-
-        //Manipulate the animator's PlayerSpeed parameter to match the absolute value of our horizontal shift
-        //Has to use absolute value so that PlayerSpeed doesn't become negative when the player moves to the left
-        animator.SetFloat("PlayerSpeed", Mathf.Abs(horizontalShift));
-
-        //Make sure our shifts happen per second instead of per frame 
-        horizontalShift *= Time.deltaTime; 
-        verticalShift *= Time.deltaTime; 
-
-        //Change sprite position by adjusting X and Y axes
-        transform.Translate(horizontalShift, verticalShift, 0);
-
-        //Flip the sprite if its current orientation does not match the direction in which the user wants it to move
-        if (horizontalShift > 0 && !facingRight) {
-            facingRight = pirate_sprite.Flip(gameObject,facingRight);
-        }
-
-        if (horizontalShift < 0 && facingRight) {
-            facingRight = pirate_sprite.Flip(gameObject,facingRight);
-        }
+        float hShift; 
+        Move(out hShift); 
+        Flip(hShift); 
 
         //Listen for damage, and take damage if necessary 
         //In its current form, I'm just pressing space bar to make the player take damage, just to make sure the health bar functions 
@@ -88,13 +72,27 @@ public class Player : MonoBehaviour
     }
 
     //Flip function (for movement/animation)
-    void Flip() 
+    void Flip(float horizontalShift) 
     {
-        Vector3 currentScale = gameObject.transform.localScale; 
-        currentScale.x *= -1; 
-        gameObject.transform.localScale = currentScale; 
+        //Flip the sprite if its current orientation does not match the direction in which the user wants it to move
+        if (horizontalShift > 0 && !facingRight) {
+            facingRight = pirate_sprite.Flip(gameObject,facingRight);
+        }
 
-        facingRight = !facingRight; 
+        if (horizontalShift < 0 && facingRight) {
+            facingRight = pirate_sprite.Flip(gameObject,facingRight);
+        }
+    }
+
+    void Move(out float hShift)
+    {
+        //Define the magnitude of horizontal and vertical movements by getting the input axis and multiplying it by speed
+        hShift = Input.GetAxis("Horizontal"); 
+        float vShift = Input.GetAxis("Vertical"); 
+ 
+        // movement updates to enable smooth transitions 
+        movement = new Vector3(hShift,vShift, magnitude);
+        rb.velocity = new Vector2(movement.x, movement.y) * speed;
     }
 
 #endregion
