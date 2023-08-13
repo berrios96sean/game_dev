@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
 
 #endregion
 
-#region Functions 
+#region Main Functions 
+
     private void Awake()
     {
         // Loads these object in the Unity editor automatically binding to the Player Object 
@@ -63,6 +64,10 @@ public class Player : MonoBehaviour
             TakeDamage(20); 
         }
     }
+
+#endregion
+
+#region Helper Functions 
 
     //Processes damage and updates health bar accordingly
     void TakeDamage(int damage) 
