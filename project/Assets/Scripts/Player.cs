@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cainos.PixelArtTopDown_Basic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -32,6 +33,8 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D rb; 
     Vector3 movement; 
+    // public Camera cam; 
+    // Vector2 mousePos; 
 
 #endregion
 
@@ -56,14 +59,22 @@ public class Player : MonoBehaviour
         float hShift; 
         Move(out hShift); 
         Flip(hShift); 
+        // mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
         //Listen for damage, and take damage if necessary 
         //In its current form, I'm just pressing space bar to make the player take damage, just to make sure the health bar functions 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(20); 
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     TakeDamage(20); 
+        // }
     }
+
+    // void FixedUpdate()
+    // {
+    //     Vector2 lookDir = mousePos - rb.position; 
+    //     float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+    //     rb.rotation = angle; 
+    // }
 
 #endregion
 
@@ -98,6 +109,12 @@ public class Player : MonoBehaviour
         // movement updates to enable smooth transitions 
         movement = new Vector3(hShift,vShift, magnitude);
         rb.velocity = new Vector2(movement.x, movement.y) * speed;
+    }
+
+    public Vector2 GetFacingDirection()
+    {
+        // Return the direction the player is facing as a Vector2
+        return new Vector2(Mathf.Cos(Mathf.Deg2Rad * transform.eulerAngles.z), Mathf.Sin(Mathf.Deg2Rad * transform.eulerAngles.z));
     }
 
 #endregion
